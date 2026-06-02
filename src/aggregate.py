@@ -1,4 +1,3 @@
-"""Roll up deals by month, sector, deal type for charts and tables."""
 from __future__ import annotations
 
 import json

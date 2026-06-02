@@ -1,7 +1,3 @@
-"""Sub-segment the 18 real estate deals from dealIQ into asset classes and buyer types.
-
-Hand-classification because n=17 unique. Source of truth is the seeded SQLite DB.
-"""
 from __future__ import annotations
 import sqlite3
 from pathlib import Path
@@ -9,10 +5,7 @@ import pandas as pd
 
 DB = Path(__file__).resolve().parents[1] / "data" / "cache" / "deals.db"
 
-# (target_substring, asset_class, buyer_type)
-# buyer_type: institutional, sponsor_mid, private, foreign, corporate
 CLASSIFICATION = [
-    # target_match, asset_class, buyer_type, unit_count, sub_market
     ("Cousins Properties", "office", "institutional", None, "downtown"),
     ("Block 21", "hotel_mixed", "institutional", None, "downtown"),
     ("Ryman Hospitality", "hotel_mixed", "institutional", None, "downtown"),
@@ -39,8 +32,6 @@ CLASSIFICATION = [
 def load() -> pd.DataFrame:
     with sqlite3.connect(DB) as con:
         df = pd.read_sql("SELECT * FROM deals WHERE sector='real_estate'", con)
-    # dedupe Cousins (same deal, two sources)
-    # Two Cousins rows are the same deal from two sources; dedupe on acquirer+ev when ev disclosed
     disclosed = df[df["ev_usd"].notna()].drop_duplicates(subset=["acquirer", "ev_usd"])
     undisclosed = df[df["ev_usd"].isna()]
     df = pd.concat([disclosed, undisclosed], ignore_index=True).sort_values("announced_date", ascending=False).reset_index(drop=True)

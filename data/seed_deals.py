@@ -1,8 +1,3 @@
-"""Seed the deals.db with deals hand-extracted from the first ingestion batch.
-
-This exists so the dashboard and paper have real data immediately.
-Production pipeline runs extract.py to grow the dataset automatically.
-"""
 from __future__ import annotations
 
 import json
@@ -14,7 +9,6 @@ DB = CACHE / "deals.db"
 
 
 SEED_DEALS = [
-    # source_id, target, acquirer, sector, deal_type, announced_date, ev_usd, description
     (0, "Austin multifamily property (Haven Housing target)", "Haven Housing", "real_estate", "acquisition", "2025-11-01", None, "Suburban Austin multifamily acquisition"),
     (1, "Downtown Austin office building", "Austin real estate firm (undisclosed)", "real_estate", "acquisition", "2025-10-01", None, "Large downtown office tower acquisition"),
     (2, "Austin office property", "Private investor (undisclosed)", "real_estate", "acquisition", "2025-09-01", None, "Austin office property sale to private investor"),

@@ -1,14 +1,3 @@
-"""Regex prefilter: from raw RSS items, keep only items that look like M&A announcements
-involving an Austin-area target or acquirer.
-
-Strategy:
-  1. Must contain at least one M&A trigger word.
-  2. Must reference Austin metro (Austin, Round Rock, Cedar Park, Pflugerville, etc.) OR the
-     source is already Austin-only (Austin Business Journal, Austin Statesman).
-
-The Claude extraction step is the authoritative classifier; this prefilter only
-cuts cost by dropping the obvious non-deals before we pay for an LLM call.
-"""
 from __future__ import annotations
 
 import re
@@ -18,7 +7,6 @@ import pandas as pd
 
 CACHE = Path(__file__).resolve().parent / "cache"
 
-# Mid-market M&A trigger words. Tuned to be inclusive; the LLM will reject false positives.
 TRIGGERS = re.compile(
     r"\b("
     r"acquir(ed|es|ing|ition)|"
@@ -36,7 +24,6 @@ TRIGGERS = re.compile(
     re.IGNORECASE,
 )
 
-# Austin metro localities. Includes major suburbs and county seats.
 AUSTIN_LOC = re.compile(
     r"\b(Austin|Round Rock|Cedar Park|Pflugerville|Leander|Georgetown|Kyle|Buda|"
     r"Hutto|Lakeway|Bee Cave|Westlake|San Marcos|Manor|Travis County|Williamson County|"

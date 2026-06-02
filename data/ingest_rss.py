@@ -1,7 +1,3 @@
-"""Pull all configured RSS feeds, normalize, dedupe by URL, store to CSV.
-
-Writes data/cache/raw_items.csv with columns [source, title, link, published, summary].
-"""
 from __future__ import annotations
 
 import time

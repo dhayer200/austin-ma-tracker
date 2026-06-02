@@ -1,4 +1,3 @@
-"""dealIQ Streamlit dashboard."""
 from __future__ import annotations
 
 import sqlite3
@@ -10,8 +9,8 @@ import matplotlib.pyplot as plt
 
 DB = Path(__file__).resolve().parent / "data" / "cache" / "deals.db"
 
-st.set_page_config(page_title="dealIQ", layout="wide")
-st.title("dealIQ: Austin MSA M&A tracker")
+st.set_page_config(page_title="Austin M&A tracker", layout="wide")
+st.title("Austin MSA M&A tracker")
 st.caption("Announced mid-market transactions involving Austin-area targets or acquirers. Hourly RSS ingestion, LLM-extracted, hand-verified.")
 
 
@@ -81,4 +80,4 @@ display.columns = ["Date", "Target", "Acquirer", "Sector", "Type", "EV", "Descri
 st.dataframe(display, use_container_width=True, height=600)
 
 st.markdown("---")
-st.markdown("Built by [D Hayer](https://deephayer.com) as a wedge project for Austin boutique IB internship outreach. Data pipeline at [github.com/dhayer-iq/dealIQ](https://github.com/dhayer-iq/dealIQ).")
+st.markdown("Built by [D Hayer](https://deephayer.com). Source at [github.com/dhayer200/austin-ma-tracker](https://github.com/dhayer200/austin-ma-tracker).")

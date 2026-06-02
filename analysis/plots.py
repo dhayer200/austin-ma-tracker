@@ -1,4 +1,3 @@
-"""Plots for the RE deep-dive paper."""
 from __future__ import annotations
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -82,14 +81,10 @@ def fig_timeline(df: pd.DataFrame) -> None:
 
 
 def fig_student_concentration(df: pd.DataFrame) -> None:
-    """The standout finding: 3 student housing deals in 3 months from 3 different institutional sponsors."""
     sh = df[df["asset_class"] == "student_housing"].copy()
     sh["announced_date"] = pd.to_datetime(sh["announced_date"])
     sh = sh.sort_values("announced_date")
     fig, ax = plt.subplots(figsize=(7.5, 3.5))
-    sponsors = sh["acquirer"].str.split("/").str[0].str.strip().str.split().str[0]
-    labels = [f"{s}\n{d.strftime('%b %Y')}" for s, d in zip(sh["acquirer"], sh["announced_date"])]
-    beds = [670, 243, "n/a"]
     ax.scatter(sh["announced_date"], range(len(sh)), s=200, color=ACCENT2)
     for i, (date, acq) in enumerate(zip(sh["announced_date"], sh["acquirer"])):
         ax.text(date, i + 0.15, acq, fontsize=9, ha="center")

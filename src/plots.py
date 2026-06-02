@@ -1,9 +1,3 @@
-"""Figures for the paper.
-
-  fig1_volume.png   -- deal count by month
-  fig2_sector.png   -- deal count by sector
-  fig3_ev.png       -- disclosed EVs sorted, log scale
-"""
 from __future__ import annotations
 
 from pathlib import Path

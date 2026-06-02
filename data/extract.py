@@ -1,23 +1,3 @@
-"""Use the Claude CLI to extract structured deal records from prefiltered candidates.
-
-Sends candidates in batches of 20 to `claude -p` with a strict JSON schema.
-Parses the response and upserts to data/cache/deals.db (SQLite).
-
-Schema for each deal:
-  target            -- company being acquired
-  acquirer          -- buyer
-  sector            -- one of: real_estate, tech, healthcare, financial_services,
-                       consumer, industrial, energy, education, services, other
-  deal_type         -- acquisition, merger, recap, strategic_investment, asset_sale
-  announced_date    -- ISO date if known
-  ev_usd            -- enterprise value in USD if disclosed; null otherwise
-  status            -- announced, completed, terminated
-  description       -- one-sentence summary
-  is_real_deal      -- true if this is a genuine corporate M&A or RE transaction,
-                       false for sports trades, government acquisitions, etc.
-
-The pipeline keeps only is_real_deal=true.
-"""
 from __future__ import annotations
 
 import json
